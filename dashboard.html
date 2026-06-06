@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>UMB Esport Dashboard</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="dashboard-page">
+
+  <nav class="navbar">
+    <div class="navbar-brand">🎮 UMB Esport Dashboard</div>
+    <button id="logout-btn" class="btn-danger">Logout</button>
+  </nav>
+
+  <div class="container">
+    <h2>👥 Member Leaderboard</h2>
+
+    <table class="members-table">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Username</th>
+          <th>Level</th>
+          <th>XP</th>
+          <th>Total Pesan</th>
+          <th>Aksi</th>
+        </tr>
+      </thead>
+      <tbody id="members-table">
+        <tr>
+          <td colspan="6">Loading...</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <script type="module" src="js/dashboard.js"></script>
+
+</body>
+</html>
