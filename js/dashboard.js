@@ -1,13 +1,10 @@
 import { supabase } from './supabase.js'
 import { checkAuth, logout } from './auth.js'
 
-// Cek auth dulu
 await checkAuth()
 
-// Logout button
 document.getElementById('logout-btn').addEventListener('click', logout)
 
-// Ambil semua member dari Supabase
 async function loadMembers() {
   const { data, error } = await supabase
     .from('levels')
@@ -22,7 +19,6 @@ async function loadMembers() {
   renderTable(data)
 }
 
-// Render tabel member
 function renderTable(members) {
   const tbody = document.getElementById('members-table')
   tbody.innerHTML = ''
@@ -34,10 +30,13 @@ function renderTable(members) {
       <td>${member.username}</td>
       <td>${member.level}</td>
       <td>${member.xp}</td>
+      <td>${member.coins || 0}</td>
       <td>${member.total_messages}</td>
       <td>
         <button onclick="addXP('${member.user_id}', '${member.username}', ${member.xp})">➕ XP</button>
         <button onclick="removeXP('${member.user_id}', '${member.username}', ${member.xp})">➖ XP</button>
+        <button onclick="addCoins('${member.user_id}', '${member.username}', ${member.coins || 0})">➕ Koin</button>
+        <button onclick="removeCoins('${member.user_id}', '${member.username}', ${member.coins || 0})">➖ Koin</button>
       </td>
     `
     tbody.appendChild(row)
@@ -78,6 +77,38 @@ window.removeXP = async function(userId, username, currentXP) {
   loadMembers()
 }
 
+// Tambah Koin
+window.addCoins = async function(userId, username, currentCoins) {
+  const amount = prompt(`Tambah berapa koin untuk ${username}?`)
+  if (!amount || isNaN(amount)) return
+
+  const newCoins = currentCoins + parseInt(amount)
+
+  await supabase
+    .from('levels')
+    .update({ coins: newCoins })
+    .eq('user_id', userId)
+
+  alert(`✅ Koin ${username} berhasil ditambah!`)
+  loadMembers()
+}
+
+// Kurangi Koin
+window.removeCoins = async function(userId, username, currentCoins) {
+  const amount = prompt(`Kurangi berapa koin untuk ${username}?`)
+  if (!amount || isNaN(amount)) return
+
+  const newCoins = Math.max(0, currentCoins - parseInt(amount))
+
+  await supabase
+    .from('levels')
+    .update({ coins: newCoins })
+    .eq('user_id', userId)
+
+  alert(`✅ Koin ${username} berhasil dikurangi!`)
+  loadMembers()
+}
+
 // Hitung level dari XP
 function calculateLevel(xp) {
   let level = 0
@@ -87,5 +118,4 @@ function calculateLevel(xp) {
   return level
 }
 
-// Load data saat halaman dibuka
 loadMembers()
