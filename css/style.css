@@ -191,3 +191,97 @@ body {
   background: #ed4245;
   color: #fff;
 }
+
+/* Tab Navigation */
+.tab-nav {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.tab-btn {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  background: #2f3136;
+  color: #fff;
+  font-size: 14px;
+}
+
+.tab-btn.active {
+  background: #5865F2;
+}
+
+.tab-content {
+  display: none;
+}
+
+.tab-content.active {
+  display: block;
+}
+
+/* Admin Cards */
+.admin-card {
+  background: #2f3136;
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+.admin-card h3 {
+  margin-bottom: 15px;
+  color: #fff;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 5px;
+  color: #b9bbbe;
+  font-size: 14px;
+}
+
+.form-group select,
+.form-group textarea {
+  width: 100%;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #40444b;
+  background: #40444b;
+  color: #fff;
+  font-size: 14px;
+}
+
+.form-group textarea {
+  resize: vertical;
+}
+
+.btn-primary {
+  padding: 10px 20px;
+  background: #5865F2;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.btn-primary:hover {
+  background: #4752c4;
+}
+
+.status-msg {
+  margin-top: 10px;
+  font-size: 14px;
+  color: #b9bbbe;
+}
+
+.warning-text {
+  color: #faa61a;
+  font-size: 13px;
+  margin-bottom: 10px;
+}

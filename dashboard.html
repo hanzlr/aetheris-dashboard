@@ -16,26 +16,102 @@
   </nav>
 
   <div class="container">
-    <h2>👥 Member Leaderboard</h2>
 
-    <table class="members-table">
-      <thead>
-        <tr>
-          <th>#</th>
-          <th>Username</th>
-          <th>Level</th>
-          <th>XP</th>
-          <th>Koin</th>
-          <th>Total Pesan</th>
-          <th>Aksi</th>
-        </tr>
-      </thead>
-      <tbody id="members-table">
-        <tr>
-          <td colspan="6">Loading...</td>
-        </tr>
-      </tbody>
-    </table>
+    <!-- Tab Navigation -->
+    <div class="tab-nav">
+      <button class="tab-btn active" data-tab="members">👥 Member Leaderboard</button>
+      <button class="tab-btn" data-tab="admin">⚙️ Admin Tools</button>
+    </div>
+
+    <!-- Tab: Member Leaderboard -->
+    <div id="tab-members" class="tab-content active">
+      <h2>👥 Member Leaderboard</h2>
+      <table class="members-table">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Username</th>
+            <th>Level</th>
+            <th>XP</th>
+            <th>Koin</th>
+            <th>Total Pesan</th>
+            <th>Aksi</th>
+          </tr>
+        </thead>
+        <tbody id="members-table">
+          <tr>
+            <td colspan="7">Loading...</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Tab: Admin Tools -->
+    <div id="tab-admin" class="tab-content">
+      <h2>⚙️ Admin Tools</h2>
+
+      <!-- Announcement -->
+      <div class="admin-card">
+        <h3>📢 Kirim Announcement</h3>
+        <div class="form-group">
+          <label>Channel</label>
+          <select id="announce-channel">
+            <option value="">Loading channels...</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Mention</label>
+          <select id="announce-mention">
+            <option value="none">Tidak ada</option>
+            <option value="everyone">@everyone</option>
+            <option value="here">@here</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Pesan</label>
+          <textarea id="announce-message" rows="4" placeholder="Tulis pengumuman..."></textarea>
+        </div>
+        <button id="announce-btn" class="btn-primary">📢 Kirim Announcement</button>
+        <p id="announce-status" class="status-msg"></p>
+      </div>
+
+      <!-- Give Loot Box -->
+      <div class="admin-card">
+        <h3>🎁 Give Loot Box</h3>
+        <div class="form-group">
+          <label>Member</label>
+          <select id="givebox-member">
+            <option value="">Pilih member...</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Jenis Box</label>
+          <select id="givebox-type">
+            <option value="common">🎁 Common Box</option>
+            <option value="rare">💜 Rare Box</option>
+            <option value="legendary">🌟 Legendary Box</option>
+          </select>
+        </div>
+        <button id="givebox-btn" class="btn-primary">🎁 Give Loot Box</button>
+        <p id="givebox-status" class="status-msg"></p>
+      </div>
+
+      <!-- Reset Member -->
+      <div class="admin-card">
+        <h3>🔄 Reset Member</h3>
+        <div class="form-group">
+          <label>Member</label>
+          <select id="reset-member">
+            <option value="">Pilih member...</option>
+          </select>
+        </div>
+        <p class="warning-text">⚠️ Reset akan menghapus semua data member (XP, koin, badge, inventory)!</p>
+        <button id="reset-btn" class="btn-danger">🔄 Reset Member</button>
+        <p id="reset-status" class="status-msg"></p>
+      </div>
+
+    </div>
+
   </div>
 
   <script type="module" src="js/dashboard.js"></script>
