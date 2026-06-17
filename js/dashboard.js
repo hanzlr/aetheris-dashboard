@@ -3,7 +3,7 @@ import { checkAuth, logout } from "./auth.js";
 
 await checkAuth();
 
-const API_URL = "https://umb-esport-bot-production.up.railway.app";
+const API_URL = 'https://umb-esport-bot-production-abed.up.railway.app';
 const API_KEY = "umb-esport-2024-secret-key";
 
 document.getElementById("logout-btn").addEventListener("click", logout);
