@@ -97,6 +97,10 @@ cd umb-esport-dashboard
 - **Bot Repository**: https://github.com/hanzlr/umb-esport-bot
 - **Bot API**: https://umb-esport-bot-production-abed.up.railway.app
 
+## 📋 Changelog
+
+Lihat semua perubahan di [CHANGELOG.md](CHANGELOG.md)
+
 ## 👤 Developer
 
 Dibuat oleh **hanzlr** dari **NEXALAB** untuk UMB Esport
