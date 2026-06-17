@@ -21,6 +21,7 @@
     <div class="tab-nav">
       <button class="tab-btn active" data-tab="members">👥 Member Leaderboard</button>
       <button class="tab-btn" data-tab="admin">⚙️ Admin Tools</button>
+      <button class="tab-btn" data-tab="event">🎉 Event System</button>
     </div>
 
     <!-- Tab: Member Leaderboard -->
@@ -108,6 +109,57 @@
         <p class="warning-text">⚠️ Reset akan menghapus semua data member (XP, koin, badge, inventory)!</p>
         <button id="reset-btn" class="btn-danger">🔄 Reset Member</button>
         <p id="reset-status" class="status-msg"></p>
+      </div>
+
+    </div>
+
+    <!-- Tab: Event System -->
+    <div id="tab-event" class="tab-content">
+      <h2>🎉 Event System</h2>
+
+      <!-- Status Event -->
+      <div class="admin-card">
+        <h3>📊 Status Event Sekarang</h3>
+        <div id="event-status-box">
+          <p>⏳ Mengecek event...</p>
+        </div>
+        <button id="stop-event-btn" class="btn-danger" style="display:none">⛔ Stop Event</button>
+        <p id="stop-event-status" class="status-msg"></p>
+      </div>
+
+      <!-- Start Event -->
+      <div class="admin-card">
+        <h3>🚀 Start Event Baru</h3>
+        <div class="form-group">
+          <label>Jenis Event</label>
+          <select id="event-type">
+            <option value="double_xp">🎉 Double XP</option>
+            <option value="double_coins">💰 Double Coins</option>
+            <option value="fishing_frenzy">🎣 Fishing Frenzy</option>
+            <option value="loot_rain">🎁 Loot Rain (instant, kasih loot box ke semua)</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Multiplier (khusus Double XP & Double Coins)</label>
+          <select id="event-multiplier">
+            <option value="2">2x</option>
+            <option value="3">3x</option>
+            <option value="5">5x</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Durasi (jam)</label>
+          <input type="number" id="event-duration" value="1" min="1" max="24"
+            style="width:100%;padding:10px;border-radius:8px;border:1px solid #40444b;background:#40444b;color:#fff;">
+        </div>
+        <div class="form-group">
+          <label>Announce ke Channel</label>
+          <select id="event-channel">
+            <option value="">Tidak perlu announce</option>
+          </select>
+        </div>
+        <button id="start-event-btn" class="btn-primary">🚀 Start Event</button>
+        <p id="start-event-status" class="status-msg"></p>
       </div>
 
     </div>
