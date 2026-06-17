@@ -4,7 +4,7 @@ Semua perubahan penting pada project UMB Esport Dashboard akan didokumentasikan 
 
 ---
 
-## [v1.0.0] - 2024
+## [v1.0.0] - 2026
 
 ### 🎉 Initial Release
 
