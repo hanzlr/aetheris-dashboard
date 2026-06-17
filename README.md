@@ -1,5 +1,12 @@
 # 🎮 UMB Esport Dashboard
 
+![HTML](https://img.shields.io/badge/HTML-5-orange)
+![CSS](https://img.shields.io/badge/CSS-3-blue)
+![JavaScript](https://img.shields.io/badge/JavaScript-Vanilla-yellow)
+![Supabase](https://img.shields.io/badge/Database-Supabase-3ECF8E)
+![Vercel](https://img.shields.io/badge/Hosted-Vercel-black)
+![License](https://img.shields.io/badge/License-MIT-yellow)
+
 Web dashboard admin untuk bot Discord UMB Esport. Dibangun dengan HTML, CSS, dan JavaScript vanilla.
 
 ## ✨ Fitur
