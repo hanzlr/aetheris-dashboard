@@ -394,3 +394,6 @@ loadMembers();
 loadChannels();
 loadEventStatus();
 loadEventChannels();
+
+// Refresh event status setiap 30 detik, bukan terus-menerus
+setInterval(loadEventStatus, 30000);
