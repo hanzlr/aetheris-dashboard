@@ -3,7 +3,7 @@ import { checkAuth, logout } from "./auth.js";
 
 await checkAuth();
 
-const API_URL = 'https://umb-esport-bot-production-abed.up.railway.app';
+const API_URL = "https://umb-esport-bot-production-abed.up.railway.app";
 const API_KEY = "umb-esport-2024-secret-key";
 
 document.getElementById("logout-btn").addEventListener("click", logout);
@@ -388,12 +388,82 @@ function calculateLevel(xp) {
 }
 
 // ============================================================
+// PREMIUM SYSTEM
+// ============================================================
+document
+  .getElementById("generate-key-btn")
+  .addEventListener("click", async () => {
+    const duration = document.getElementById("premium-duration").value;
+    const status = document.getElementById("generate-key-status");
+    const keyBox = document.getElementById("generated-key-box");
+    const keyText = document.getElementById("generated-key-text");
+
+    status.textContent = "⏳ Generating key...";
+
+    try {
+      const res = await fetch(`${API_URL}/premium/generate`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json", "x-api-key": API_KEY },
+        body: JSON.stringify({ duration }),
+      });
+      const data = await res.json();
+      if (data.success) {
+        status.textContent = "✅ Key berhasil dibuat!";
+        keyText.textContent = data.key;
+        keyBox.style.display = "block";
+        loadPremiumKeys();
+      } else {
+        status.textContent = `❌ ${data.error}`;
+      }
+    } catch (error) {
+      status.textContent = "❌ Gagal generate key!";
+    }
+  });
+
+async function loadPremiumKeys() {
+  try {
+    const res = await fetch(`${API_URL}/premium/keys`, {
+      headers: { "x-api-key": API_KEY },
+    });
+    const keys = await res.json();
+    const tbody = document.getElementById("premium-keys-table");
+
+    if (!keys || keys.length === 0) {
+      tbody.innerHTML = '<tr><td colspan="4">Belum ada key</td></tr>';
+      return;
+    }
+
+    const durationLabels = {
+      "1month": "1 Bulan",
+      "3month": "3 Bulan",
+      permanent: "Permanent",
+    };
+
+    tbody.innerHTML = keys
+      .map(
+        (k) => `
+      <tr>
+        <td><code>${k.key}</code></td>
+        <td>${durationLabels[k.duration] || k.duration}</td>
+        <td>${k.status === "used" ? "✅ Used" : "🟡 Unused"}</td>
+        <td>${k.used_by || "-"}</td>
+      </tr>
+    `,
+      )
+      .join("");
+  } catch (error) {
+    console.error("Error loading premium keys:", error);
+  }
+}
+
+// ============================================================
 // INIT
 // ============================================================
 loadMembers();
 loadChannels();
 loadEventStatus();
 loadEventChannels();
+loadPremiumKeys();
 
 // Refresh event status setiap 30 detik, bukan terus-menerus
 setInterval(loadEventStatus, 30000);

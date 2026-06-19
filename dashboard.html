@@ -22,6 +22,7 @@
       <button class="tab-btn active" data-tab="members">👥 Member Leaderboard</button>
       <button class="tab-btn" data-tab="admin">⚙️ Admin Tools</button>
       <button class="tab-btn" data-tab="event">🎉 Event System</button>
+      <button class="tab-btn" data-tab="premium">⭐ Premium</button>
     </div>
 
     <!-- Tab: Member Leaderboard -->
@@ -162,6 +163,51 @@
         <p id="start-event-status" class="status-msg"></p>
       </div>
 
+    </div>
+
+    <!-- Tab: Premium -->
+    <div id="tab-premium" class="tab-content">
+      <h2>⭐ Premium Keys</h2>
+
+      <!-- Generate Key -->
+      <div class="admin-card">
+        <h3>🔑 Generate Premium Key</h3>
+        <div class="form-group">
+          <label>Durasi</label>
+          <select id="premium-duration">
+            <option value="1month">1 Bulan</option>
+            <option value="3month">3 Bulan</option>
+            <option value="permanent">Permanent</option>
+          </select>
+        </div>
+        <button id="generate-key-btn" class="btn-primary">🔑 Generate Key</button>
+        <p id="generate-key-status" class="status-msg"></p>
+        <div id="generated-key-box"
+          style="display:none; margin-top:15px; padding:15px; background:#40444b; border-radius:8px;">
+          <p style="margin-bottom:5px; color:#b9bbbe;">Key berhasil dibuat:</p>
+          <p id="generated-key-text" style="font-size:18px; font-weight:bold; color:#FFD700;"></p>
+        </div>
+      </div>
+
+      <!-- Daftar Keys -->
+      <div class="admin-card">
+        <h3>📋 Daftar Premium Keys</h3>
+        <table class="members-table">
+          <thead>
+            <tr>
+              <th>Key</th>
+              <th>Durasi</th>
+              <th>Status</th>
+              <th>Digunakan Oleh</th>
+            </tr>
+          </thead>
+          <tbody id="premium-keys-table">
+            <tr>
+              <td colspan="4">Loading...</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
 
   </div>
