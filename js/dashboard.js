@@ -158,6 +158,8 @@ document
 // ============================================================
 // LOAD MEMBERS
 // ============================================================
+let allMembersData = [];
+
 async function loadMembers() {
   const { data, error } = await supabase
     .from("levels")
@@ -169,9 +171,19 @@ async function loadMembers() {
     return;
   }
 
+  allMembersData = data;
   renderTable(data);
   populateMemberDropdowns(data);
 }
+
+// Search member
+document.getElementById("search-member").addEventListener("input", (e) => {
+  const query = e.target.value.toLowerCase();
+  const filtered = allMembersData.filter((m) =>
+    m.username.toLowerCase().includes(query),
+  );
+  renderTable(filtered);
+});
 
 function renderTable(members) {
   const tbody = document.getElementById("members-table");
