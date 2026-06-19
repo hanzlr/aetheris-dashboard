@@ -420,6 +420,30 @@ document
     }
   });
 
+window.deletePremiumKey = async function (key) {
+  const confirm = window.confirm(
+    `⚠️ Hapus key ${key}? Tindakan ini tidak bisa dibatalkan!`,
+  );
+  if (!confirm) return;
+
+  try {
+    const res = await fetch(`${API_URL}/premium/delete`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json", "x-api-key": API_KEY },
+      body: JSON.stringify({ key }),
+    });
+    const data = await res.json();
+    if (data.success) {
+      alert("✅ Key berhasil dihapus!");
+      loadPremiumKeys();
+    } else {
+      alert(`❌ ${data.error}`);
+    }
+  } catch (error) {
+    alert("❌ Gagal menghapus key!");
+  }
+};
+
 async function loadPremiumKeys() {
   try {
     const res = await fetch(`${API_URL}/premium/keys`, {
@@ -447,6 +471,7 @@ async function loadPremiumKeys() {
         <td>${durationLabels[k.duration] || k.duration}</td>
         <td>${k.status === "used" ? "✅ Used" : "🟡 Unused"}</td>
         <td>${k.used_by || "-"}</td>
+        <td><button onclick="deletePremiumKey('${k.key}')" class="btn-danger" style="padding:5px 10px;font-size:12px;">🗑️ Hapus</button></td>
       </tr>
     `,
       )
