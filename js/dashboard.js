@@ -4,7 +4,7 @@ import { checkAuth, logout } from "./auth.js";
 await checkAuth();
 
 const API_URL = "https://aetheris-bot-production.up.railway.app";
-const API_KEY = "umb-esport-2024-secret-key";
+const API_KEY = "8d522975f5842f9b4af4853e55583583711794c6eca95c96cca6e2a079e3f2ce";
 
 document.getElementById("logout-btn").addEventListener("click", logout);
 
