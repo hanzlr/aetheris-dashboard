@@ -15,13 +15,24 @@ Web dashboard admin untuk bot Discord Aetheris. Dibangun dengan HTML, CSS, dan J
 
 ## ✨ Fitur
 
-- 👥 **Member Leaderboard** — Lihat ranking member berdasarkan XP, dengan search/filter
+- 👥 **Member Leaderboard** — Lihat ranking member berdasarkan XP, dengan search/filter dan sorting kolom
 - ✏️ **Edit Member** — Tambah/kurangi XP dan koin member
 - 📢 **Announcement** — Kirim pengumuman ke channel Discord via bot
 - 🎁 **Give Loot Box** — Kasih loot box ke member tertentu
 - 🔄 **Reset Member** — Reset semua data member
 - 🎉 **Event System** — Start/stop event (Double XP, Double Coins, dll)
 - ⭐ **Premium Keys** — Generate dan hapus premium redeem key
+- 📊 **Stats Overview** — Ringkasan total member, status event, dan jumlah premium key terpakai
+
+## 🎨 UI/UX
+
+- Tema warna purple/blue/gold yang konsisten dengan mascot Aetheris
+- Mascot & banner custom di halaman login, navbar, dan empty state
+- Notifikasi toast (menggantikan alert browser bawaan)
+- Modal konfirmasi custom untuk aksi destruktif (reset member, hapus key, stop event)
+- Sorting tabel member (klik header Level/XP/Koin/Total Pesan)
+- Loading state dengan spinner
+- Login bisa langsung pakai tombol **Enter**
 
 ## 🛠️ Tech Stack
 
@@ -32,16 +43,21 @@ Web dashboard admin untuk bot Discord Aetheris. Dibangun dengan HTML, CSS, dan J
 - **Bot API**: Express.js (Railway)
 
 ## 📁 Struktur Folder
+
 ```
 aetheris-dashboard/
 ├── index.html          # Halaman login
 ├── dashboard.html      # Halaman dashboard utama
 ├── css/
 │   └── style.css       # Styling
-└── js/
-    ├── supabase.js     # Supabase client
-    ├── auth.js         # Autentikasi
-    └── dashboard.js    # Logic dashboard
+├── js/
+│   ├── supabase.js     # Supabase client
+│   ├── auth.js         # Autentikasi
+│   └── dashboard.js    # Logic dashboard
+└── assets/
+    ├── aetheris-banner.png   # Banner login & README
+    ├── round-mascot.png      # Icon navbar & favicon
+    └── aetheris-mascot.png   # Ilustrasi empty state
 ```
 
 ## ⚙️ Environment Variables
@@ -60,6 +76,8 @@ const API_URL = 'https://aetheris-bot-production.up.railway.app'
 const API_KEY = 'your_api_secret_key'
 ```
 
+> ⚠️ **Catatan keamanan**: kedua key di atas berjalan di sisi client (browser), jadi tetap bisa dilihat siapa pun lewat DevTools meskipun halaman login di-protect. Jangan pakai key dengan privilese tinggi di sini, dan pertimbangkan proxy/backend untuk produksi jangka panjang.
+
 ## 🚀 Cara Setup
 
 1. Clone repository
@@ -67,25 +85,25 @@ const API_KEY = 'your_api_secret_key'
 git clone https://github.com/hanzlr/aetheris-dashboard.git
 cd aetheris-dashboard
 ```
-
 2. Isi Supabase credentials di `js/supabase.js`
-
 3. Isi API URL dan key di `js/dashboard.js`
-
-4. Deploy ke Vercel atau buka `index.html` di browser
+4. Pastikan folder `assets/` berisi `aetheris-banner.png`, `round-mascot.png`, dan `aetheris-mascot.png`
+5. Deploy ke Vercel atau buka `index.html` di browser
 
 ## 📋 Fitur Dashboard
 
 ### 👥 Member Leaderboard
 - Lihat semua member berdasarkan ranking XP
 - 🔍 Search/filter member berdasarkan username
+- ↕️ Sort tabel berdasarkan Level, XP, Koin, atau Total Pesan
 - Tambah/kurangi XP per member
 - Tambah/kurangi koin per member
+- Stats ringkasan: total member, status event aktif, jumlah premium key terpakai
 
 ### ⚙️ Admin Tools
 - 📢 Kirim announcement ke channel Discord manapun
 - 🎁 Give loot box (Common/Rare/Legendary) ke member
-- 🔄 Reset semua data member
+- 🔄 Reset semua data member (dengan modal konfirmasi)
 
 ### 🎉 Event System
 - Lihat status event yang sedang berjalan
@@ -94,13 +112,13 @@ cd aetheris-dashboard
   - 💰 Double Coins
   - 🎣 Fishing Frenzy
   - 🎁 Loot Rain
-- Stop event kapanpun
+- Stop event kapanpun (dengan modal konfirmasi)
 - Pilih channel untuk announcement event
 
 ### ⭐ Premium Keys
 - Generate premium key dengan pilihan durasi (1 Bulan / 3 Bulan / Permanent)
 - Lihat daftar semua key beserta status (Used/Unused) dan siapa yang memakai
-- Hapus key yang sudah tidak diperlukan
+- Hapus key yang sudah tidak diperlukan (dengan modal konfirmasi)
 
 ## 🔗 Links
 
