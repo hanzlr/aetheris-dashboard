@@ -35,11 +35,22 @@ Semua perubahan penting pada project UMB Esport Dashboard akan didokumentasikan 
 
 ---
 
+## [v1.1.0] - 2026
+
+### ✨ Fitur Baru
+
+##### ⭐ Premium Keys
+- Generate premium key dengan pilihan durasi (1 Bulan / 3 Bulan / Permanent)
+- Lihat daftar semua key beserta status penggunaan
+- Hapus key yang sudah tidak diperlukan
+
+##### 👥 Member Leaderboard
+- 🔍 Search/filter member berdasarkan username
+
 ## [Upcoming]
 
 ### ⏳ Fitur Yang Direncanakan
 - 🌙 Dark/Light mode toggle
-- 🔍 Search member di leaderboard
 - 📊 Filter leaderboard by level/koin/pesan
 - 📈 Grafik statistik server
 
