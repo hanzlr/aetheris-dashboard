@@ -125,6 +125,7 @@ cd aetheris-dashboard
 - **Dashboard**: https://dashboardbot-nine.vercel.app
 - **Bot Repository**: https://github.com/hanzlr/aetheris-bot
 - **Bot API**: https://aetheris-bot-production.up.railway.app
+- **Landing Page**: https://aetheris.nexalab.my.id
 
 ## 📋 Changelog
 
