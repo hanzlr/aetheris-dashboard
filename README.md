@@ -11,28 +11,28 @@
 ![Vercel](https://img.shields.io/badge/Hosted-Vercel-black)
 ![License](https://img.shields.io/badge/License-MIT-yellow)
 
-Web dashboard admin untuk bot Discord Aetheris. Dibangun dengan HTML, CSS, dan JavaScript vanilla.
+Admin web dashboard for the Aetheris Discord bot. Built with HTML, CSS, and vanilla JavaScript.
 
-## ✨ Fitur
+## ✨ Features
 
-- 👥 **Member Leaderboard** — Lihat ranking member berdasarkan XP, dengan search/filter dan sorting kolom
-- ✏️ **Edit Member** — Tambah/kurangi XP dan koin member
-- 📢 **Announcement** — Kirim pengumuman ke channel Discord via bot
-- 🎁 **Give Loot Box** — Kasih loot box ke member tertentu
-- 🔄 **Reset Member** — Reset semua data member
-- 🎉 **Event System** — Start/stop event (Double XP, Double Coins, dll)
-- ⭐ **Premium Keys** — Generate dan hapus premium redeem key
-- 📊 **Stats Overview** — Ringkasan total member, status event, dan jumlah premium key terpakai
+- 👥 **Member Leaderboard** — View member rankings based on XP, with search/filter and column sorting
+- ✏️ **Edit Member** — Add/remove XP and coins for any member
+- 📢 **Announcement** — Send announcements to a Discord channel via the bot
+- 🎁 **Give Loot Box** — Grant a loot box to a specific member
+- 🔄 **Reset Member** — Reset all data for a member
+- 🎉 **Event System** — Start/stop server events (Double XP, Double Coins, etc.)
+- ⭐ **Premium Keys** — Generate and delete premium redeem keys
+- 📊 **Stats Overview** — Summary of total members, active event status, and number of premium keys used
 
 ## 🎨 UI/UX
 
-- Tema warna purple/blue/gold yang konsisten dengan mascot Aetheris
-- Mascot & banner custom di halaman login, navbar, dan empty state
-- Notifikasi toast (menggantikan alert browser bawaan)
-- Modal konfirmasi custom untuk aksi destruktif (reset member, hapus key, stop event)
-- Sorting tabel member (klik header Level/XP/Koin/Total Pesan)
-- Loading state dengan spinner
-- Login bisa langsung pakai tombol **Enter**
+- Purple/blue/gold color theme consistent with the Aetheris mascot
+- Custom mascot & banner on the login page, navbar, and empty states
+- Toast notifications (replacing the browser's default alert)
+- Custom confirmation modals for destructive actions (reset member, delete key, stop event)
+- Sortable member table (click the Level/XP/Coins/Total Messages header)
+- Loading state with spinner
+- Login can be submitted directly with the **Enter** key
 
 ## 🛠️ Tech Stack
 
@@ -42,83 +42,83 @@ Web dashboard admin untuk bot Discord Aetheris. Dibangun dengan HTML, CSS, dan J
 - **Hosting**: Vercel
 - **Bot API**: Express.js (Railway)
 
-## 📁 Struktur Folder
+## 📁 Folder Structure
 
 ```
 aetheris-dashboard/
-├── index.html          # Halaman login
-├── dashboard.html      # Halaman dashboard utama
+├── index.html          # Login page
+├── dashboard.html      # Main dashboard page
 ├── css/
 │   └── style.css       # Styling
 ├── js/
 │   ├── supabase.js     # Supabase client
-│   ├── auth.js         # Autentikasi
-│   └── dashboard.js    # Logic dashboard
+│   ├── auth.js         # Authentication
+│   └── dashboard.js    # Dashboard logic
 └── assets/
-    ├── aetheris-banner.png   # Banner login & README
-    ├── round-mascot.png      # Icon navbar & favicon
-    └── aetheris-mascot.png   # Ilustrasi empty state
+├── aetheris-banner.png   # Login & README banner
+├── round-mascot.png      # Navbar & favicon icon
+└── aetheris-mascot.png   # Empty state illustration
 ```
 
 ## ⚙️ Environment Variables
 
-Dashboard menggunakan Supabase anon key yang di-hardcode di `js/supabase.js`:
+The dashboard uses a Supabase anon key hardcoded in `js/supabase.js`:
 
 ```javascript
 const SUPABASE_URL = 'your_supabase_url'
 const SUPABASE_KEY = 'your_supabase_anon_key'
 ```
 
-Dan API bot di `js/dashboard.js`:
+And the bot API in `js/dashboard.js`:
 
 ```javascript
 const API_URL = 'https://aetheris-bot-production.up.railway.app'
 const API_KEY = 'your_api_secret_key'
 ```
 
-> ⚠️ **Catatan keamanan**: kedua key di atas berjalan di sisi client (browser), jadi tetap bisa dilihat siapa pun lewat DevTools meskipun halaman login di-protect. Jangan pakai key dengan privilese tinggi di sini, dan pertimbangkan proxy/backend untuk produksi jangka panjang.
+> ⚠️ **Security note**: both keys above run on the client side (browser), so they can still be viewed by anyone via DevTools even if the login page is protected. Don't use high-privilege keys here, and consider a proxy/backend for long-term production use.
 
-## 🚀 Cara Setup
+## 🚀 Setup
 
-1. Clone repository
+1. Clone the repository
 ```bash
 git clone https://github.com/hanzlr/aetheris-dashboard.git
 cd aetheris-dashboard
 ```
-2. Isi Supabase credentials di `js/supabase.js`
-3. Isi API URL dan key di `js/dashboard.js`
-4. Pastikan folder `assets/` berisi `aetheris-banner.png`, `round-mascot.png`, dan `aetheris-mascot.png`
-5. Deploy ke Vercel atau buka `index.html` di browser
+2. Fill in your Supabase credentials in `js/supabase.js`
+3. Fill in the API URL and key in `js/dashboard.js`
+4. Make sure the `assets/` folder contains `aetheris-banner.png`, `round-mascot.png`, and `aetheris-mascot.png`
+5. Deploy to Vercel or open `index.html` in your browser
 
-## 📋 Fitur Dashboard
+## 📋 Dashboard Features
 
 ### 👥 Member Leaderboard
-- Lihat semua member berdasarkan ranking XP
-- 🔍 Search/filter member berdasarkan username
-- ↕️ Sort tabel berdasarkan Level, XP, Koin, atau Total Pesan
-- Tambah/kurangi XP per member
-- Tambah/kurangi koin per member
-- Stats ringkasan: total member, status event aktif, jumlah premium key terpakai
+- View all members ranked by XP
+- 🔍 Search/filter members by username
+- ↕️ Sort the table by Level, XP, Coins, or Total Messages
+- Add/remove XP per member
+- Add/remove coins per member
+- Summary stats: total members, active event status, number of premium keys used
 
 ### ⚙️ Admin Tools
-- 📢 Kirim announcement ke channel Discord manapun
-- 🎁 Give loot box (Common/Rare/Legendary) ke member
-- 🔄 Reset semua data member (dengan modal konfirmasi)
+- 📢 Send announcements to any Discord channel
+- 🎁 Give a loot box (Common/Rare/Legendary) to a member
+- 🔄 Reset all data for a member (with confirmation modal)
 
 ### 🎉 Event System
-- Lihat status event yang sedang berjalan
-- Start event baru dengan pilihan:
+- View the currently active event
+- Start a new event with options:
   - 🎉 Double XP
   - 💰 Double Coins
   - 🎣 Fishing Frenzy
   - 🎁 Loot Rain
-- Stop event kapanpun (dengan modal konfirmasi)
-- Pilih channel untuk announcement event
+- Stop an event at any time (with confirmation modal)
+- Choose a channel for the event announcement
 
 ### ⭐ Premium Keys
-- Generate premium key dengan pilihan durasi (1 Bulan / 3 Bulan / Permanent)
-- Lihat daftar semua key beserta status (Used/Unused) dan siapa yang memakai
-- Hapus key yang sudah tidak diperlukan (dengan modal konfirmasi)
+- Generate a premium key with a chosen duration (1 Month / 3 Months / Permanent)
+- View a list of all keys with their status (Used/Unused) and who redeemed them
+- Delete keys that are no longer needed (with confirmation modal)
 
 ## 🔗 Links
 
@@ -129,8 +129,8 @@ cd aetheris-dashboard
 
 ## 📋 Changelog
 
-Lihat semua perubahan di [CHANGELOG.md](CHANGELOG.md)
+See all changes in [CHANGELOG.md](CHANGELOG.md)
 
 ## 👤 Developer
 
-Dibuat oleh **hanzlr** dari **NEXALAB**
+Built by **hanzlr** from **NEXALAB**
