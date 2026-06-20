@@ -1,3 +1,5 @@
+<!-- dashboard.html -->
+
 <!DOCTYPE html>
 <html lang="id">
 
@@ -5,14 +7,21 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Aetheris Dashboard</title>
+  <link rel="icon" type="image/png" href="assets/round-mascot.png">
   <link rel="stylesheet" href="css/style.css">
 </head>
 
 <body class="dashboard-page">
 
   <nav class="navbar">
-    <div class="navbar-brand">🎮 Aetheris Dashboard</div>
-    <button id="logout-btn" class="btn-danger">Logout</button>
+    <div class="navbar-brand">
+      <img src="assets/round-mascot.png" alt="Aetheris" class="mascot-icon" onerror="this.style.display='none'">
+      Aetheris Dashboard
+    </div>
+    <div class="navbar-right">
+      <a href="https://github.com/hanzlr/aetheris-bot" target="_blank" rel="noopener" class="github-link">⭐ GitHub</a>
+      <button id="logout-btn" class="btn-danger">Logout</button>
+    </div>
   </nav>
 
   <div class="container">
@@ -28,25 +37,49 @@
     <!-- Tab: Member Leaderboard -->
     <div id="tab-members" class="tab-content active">
       <h2>👥 Member Leaderboard</h2>
+
+      <div class="stats-row" id="stats-row">
+        <div class="stat-card">
+          <div class="stat-icon">👥</div>
+          <div>
+            <div class="stat-value" id="stat-total-members">—</div>
+            <div class="stat-label">Total Member</div>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon">🎉</div>
+          <div>
+            <div class="stat-value" id="stat-event-active">—</div>
+            <div class="stat-label">Status Event</div>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon">⭐</div>
+          <div>
+            <div class="stat-value" id="stat-premium-keys">—</div>
+            <div class="stat-label">Premium Keys Terpakai</div>
+          </div>
+        </div>
+      </div>
+
       <div class="form-group" style="max-width:400px;">
-        <input type="text" id="search-member" placeholder="🔍 Cari member..."
-          style="width:100%;padding:10px;border-radius:8px;border:1px solid #40444b;background:#40444b;color:#fff;">
+        <input type="text" id="search-member" placeholder="🔍 Cari member...">
       </div>
       <table class="members-table">
         <thead>
           <tr>
             <th>#</th>
             <th>Username</th>
-            <th>Level</th>
-            <th>XP</th>
-            <th>Koin</th>
-            <th>Total Pesan</th>
+            <th class="sortable" data-sort="level">Level <span class="sort-arrow">↕</span></th>
+            <th class="sortable sort-active" data-sort="xp">XP <span class="sort-arrow">↓</span></th>
+            <th class="sortable" data-sort="coins">Koin <span class="sort-arrow">↕</span></th>
+            <th class="sortable" data-sort="total_messages">Total Pesan <span class="sort-arrow">↕</span></th>
             <th>Aksi</th>
           </tr>
         </thead>
         <tbody id="members-table">
           <tr>
-            <td colspan="7">Loading...</td>
+            <td colspan="7" class="loading-row"><span class="spinner"></span><br>Memuat data...</td>
           </tr>
         </tbody>
       </table>
@@ -154,8 +187,7 @@
         </div>
         <div class="form-group">
           <label>Durasi (jam)</label>
-          <input type="number" id="event-duration" value="1" min="1" max="24"
-            style="width:100%;padding:10px;border-radius:8px;border:1px solid #40444b;background:#40444b;color:#fff;">
+          <input type="number" id="event-duration" value="1" min="1" max="24">
         </div>
         <div class="form-group">
           <label>Announce ke Channel</label>
@@ -187,9 +219,9 @@
         <button id="generate-key-btn" class="btn-primary">🔑 Generate Key</button>
         <p id="generate-key-status" class="status-msg"></p>
         <div id="generated-key-box"
-          style="display:none; margin-top:15px; padding:15px; background:#40444b; border-radius:8px;">
-          <p style="margin-bottom:5px; color:#b9bbbe;">Key berhasil dibuat:</p>
-          <p id="generated-key-text" style="font-size:18px; font-weight:bold; color:#FFD700;"></p>
+          style="display:none; margin-top:15px; padding:15px; background:var(--bg-input); border-radius:10px;">
+          <p style="margin-bottom:5px; color:var(--text-muted);">Key berhasil dibuat:</p>
+          <p id="generated-key-text" style="font-size:18px; font-weight:bold; color:var(--gold);"></p>
         </div>
       </div>
 
@@ -208,7 +240,7 @@
           </thead>
           <tbody id="premium-keys-table">
             <tr>
-              <td colspan="4">Loading...</td>
+              <td colspan="5" class="loading-row"><span class="spinner"></span><br>Memuat data...</td>
             </tr>
           </tbody>
         </table>
@@ -216,6 +248,29 @@
     </div>
 
   </div>
+
+  <footer class="site-footer">
+    <div class="footer-brand">
+      <img src="assets/round-mascot.png" alt="Aetheris" onerror="this.style.display='none'">
+      <span>Aetheris Dashboard © 2026</span>
+    </div>
+    <div class="footer-links">
+      <a href="https://github.com/hanzlr/aetheris-bot" target="_blank" rel="noopener">GitHub</a>
+    </div>
+  </footer>
+
+  <div class="modal-overlay" id="confirm-modal">
+    <div class="modal-box">
+      <h3 id="confirm-modal-title">Konfirmasi</h3>
+      <p id="confirm-modal-message">Apakah kamu yakin?</p>
+      <div class="modal-actions">
+        <button class="modal-btn-cancel" id="confirm-modal-cancel">Batal</button>
+        <button class="btn-danger" id="confirm-modal-ok">Ya, Lanjutkan</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="toast-container"></div>
 
   <script type="module" src="js/dashboard.js"></script>
 

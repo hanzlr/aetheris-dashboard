@@ -1,3 +1,5 @@
+// js/dashboard.js
+
 import { supabase } from "./supabase.js";
 import { checkAuth, logout } from "./auth.js";
 
@@ -7,6 +9,52 @@ const API_URL = "https://aetheris-bot-production.up.railway.app";
 const API_KEY = "8d522975f5842f9b4af4853e55583583711794c6eca95c96cca6e2a079e3f2ce";
 
 document.getElementById("logout-btn").addEventListener("click", logout);
+
+// ============================================================
+// TOAST NOTIFICATION
+// ============================================================
+function showToast(message, type = "default") {
+  const container = document.getElementById("toast-container");
+  const toast = document.createElement("div");
+  toast.className = `toast ${type}`;
+  toast.textContent = message;
+  container.appendChild(toast);
+
+  setTimeout(() => {
+    toast.classList.add("toast-out");
+    setTimeout(() => toast.remove(), 250);
+  }, 3500);
+}
+
+// ============================================================
+// CONFIRM MODAL
+// ============================================================
+function showConfirm(message, title = "Konfirmasi") {
+  return new Promise((resolve) => {
+    const overlay = document.getElementById("confirm-modal");
+    document.getElementById("confirm-modal-title").textContent = title;
+    document.getElementById("confirm-modal-message").textContent = message;
+    overlay.classList.add("active");
+
+    const okBtn = document.getElementById("confirm-modal-ok");
+    const cancelBtn = document.getElementById("confirm-modal-cancel");
+
+    function cleanup(result) {
+      overlay.classList.remove("active");
+      okBtn.removeEventListener("click", onOk);
+      cancelBtn.removeEventListener("click", onCancel);
+      overlay.removeEventListener("click", onOverlay);
+      resolve(result);
+    }
+    function onOk() { cleanup(true); }
+    function onCancel() { cleanup(false); }
+    function onOverlay(e) { if (e.target === overlay) cleanup(false); }
+
+    okBtn.addEventListener("click", onOk);
+    cancelBtn.addEventListener("click", onCancel);
+    overlay.addEventListener("click", onOverlay);
+  });
+}
 
 // ============================================================
 // TAB NAVIGATION
@@ -44,8 +92,15 @@ async function loadEventStatus() {
     const stopBtn = document.getElementById("stop-event-btn");
 
     if (!event) {
-      box.innerHTML = "<p>😴 Tidak ada event yang sedang berlangsung.</p>";
+      box.innerHTML = `
+        <div style="text-align:center; padding:10px 0;">
+          <img src="assets/aetheris-mascot.png" alt="Aetheris" style="width:90px; opacity:0.85; margin-bottom:10px;">
+          <p>😴 Tidak ada event yang sedang berlangsung.</p>
+        </div>
+      `;
       stopBtn.style.display = "none";
+      const statEl = document.getElementById("stat-event-active");
+      if (statEl) statEl.textContent = "Tidak Ada";
       return;
     }
 
@@ -61,6 +116,8 @@ async function loadEventStatus() {
       <p>⏰ Berakhir dalam: <strong>${diffHours} jam ${diffMinutes} menit</strong></p>
     `;
     stopBtn.style.display = "inline-block";
+    const statEl = document.getElementById("stat-event-active");
+    if (statEl) statEl.textContent = EVENT_LABELS[event.event_type] || "Aktif";
   } catch (error) {
     document.getElementById("event-status-box").innerHTML =
       "<p>❌ Gagal mengecek event.</p>";
@@ -132,8 +189,8 @@ document
     const channelId = document.getElementById("event-channel").value;
     const status = document.getElementById("stop-event-status");
 
-    const confirm = window.confirm("⚠️ Stop event yang sedang berjalan?");
-    if (!confirm) return;
+    const confirmed = await showConfirm("Stop event yang sedang berjalan?", "⚠️ Stop Event");
+    if (!confirmed) return;
 
     status.textContent = "⏳ Menghentikan event...";
 
@@ -174,6 +231,9 @@ async function loadMembers() {
   allMembersData = data;
   renderTable(data);
   populateMemberDropdowns(data);
+
+  const totalEl = document.getElementById("stat-total-members");
+  if (totalEl) totalEl.textContent = data.length;
 }
 
 // Search member
@@ -185,16 +245,63 @@ document.getElementById("search-member").addEventListener("input", (e) => {
   renderTable(filtered);
 });
 
+// ============================================================
+// TABLE SORTING
+// ============================================================
+let currentSort = { key: "xp", dir: "desc" };
+
+document.querySelectorAll(".members-table th.sortable").forEach((th) => {
+  th.addEventListener("click", () => {
+    const key = th.dataset.sort;
+    if (currentSort.key === key) {
+      currentSort.dir = currentSort.dir === "desc" ? "asc" : "desc";
+    } else {
+      currentSort = { key, dir: "desc" };
+    }
+
+    document.querySelectorAll(".members-table th.sortable").forEach((h) => {
+      h.classList.remove("sort-active");
+      h.querySelector(".sort-arrow").textContent = "↕";
+    });
+    th.classList.add("sort-active");
+    th.querySelector(".sort-arrow").textContent =
+      currentSort.dir === "desc" ? "↓" : "↑";
+
+    const query = document.getElementById("search-member").value.toLowerCase();
+    const filtered = allMembersData.filter((m) =>
+      m.username.toLowerCase().includes(query),
+    );
+    renderTable(filtered);
+  });
+});
+
+function sortMembers(members) {
+  const { key, dir } = currentSort;
+  return [...members].sort((a, b) => {
+    const valA = a[key] || 0;
+    const valB = b[key] || 0;
+    return dir === "desc" ? valB - valA : valA - valB;
+  });
+}
+
 function renderTable(members) {
   const tbody = document.getElementById("members-table");
   tbody.innerHTML = "";
 
-  members.forEach((member, index) => {
+  const sorted = sortMembers(members);
+
+  sorted.forEach((member, index) => {
+    const initial = (member.username || "?").charAt(0).toUpperCase();
     const row = document.createElement("tr");
     row.innerHTML = `
       <td>${index + 1}</td>
-      <td>${member.username}</td>
-      <td>${member.level}</td>
+      <td>
+        <div class="avatar-cell">
+          <div class="avatar-circle">${initial}</div>
+          <span>${member.username}</span>
+        </div>
+      </td>
+      <td><span class="level-badge">Lv. ${member.level}</span></td>
       <td>${member.xp}</td>
       <td>${member.coins || 0}</td>
       <td>${member.total_messages}</td>
@@ -313,10 +420,11 @@ document.getElementById("reset-btn").addEventListener("click", async () => {
 
   if (!userId) return (status.textContent = "❌ Pilih member dulu!");
 
-  const confirm = window.confirm(
-    `⚠️ Reset semua data ${memberName}? Tindakan ini tidak bisa dibatalkan!`,
+  const confirmed = await showConfirm(
+    `Reset semua data ${memberName}? Tindakan ini tidak bisa dibatalkan!`,
+    "🔄 Reset Member"
   );
-  if (!confirm) return;
+  if (!confirmed) return;
 
   status.textContent = "⏳ Mereset...";
 
@@ -350,7 +458,7 @@ window.addXP = async function (userId, username, currentXP) {
     .from("levels")
     .update({ xp: newXP, level: newLevel })
     .eq("user_id", userId);
-  alert(`✅ XP ${username} berhasil ditambah!`);
+  showToast(`✅ XP ${username} berhasil ditambah!`, "success");
   loadMembers();
 };
 
@@ -363,7 +471,7 @@ window.removeXP = async function (userId, username, currentXP) {
     .from("levels")
     .update({ xp: newXP, level: newLevel })
     .eq("user_id", userId);
-  alert(`✅ XP ${username} berhasil dikurangi!`);
+  showToast(`✅ XP ${username} berhasil dikurangi!`, "success");
   loadMembers();
 };
 
@@ -375,7 +483,7 @@ window.addCoins = async function (userId, username, currentCoins) {
     .from("levels")
     .update({ coins: newCoins })
     .eq("user_id", userId);
-  alert(`✅ Koin ${username} berhasil ditambah!`);
+  showToast(`✅ Koin ${username} berhasil ditambah!`, "success");
   loadMembers();
 };
 
@@ -387,7 +495,7 @@ window.removeCoins = async function (userId, username, currentCoins) {
     .from("levels")
     .update({ coins: newCoins })
     .eq("user_id", userId);
-  alert(`✅ Koin ${username} berhasil dikurangi!`);
+  showToast(`✅ Koin ${username} berhasil dikurangi!`, "success");
   loadMembers();
 };
 
@@ -433,10 +541,11 @@ document
   });
 
 window.deletePremiumKey = async function (key) {
-  const confirm = window.confirm(
-    `⚠️ Hapus key ${key}? Tindakan ini tidak bisa dibatalkan!`,
+  const confirmed = await showConfirm(
+    `Hapus key ${key}? Tindakan ini tidak bisa dibatalkan!`,
+    "🗑️ Hapus Premium Key"
   );
-  if (!confirm) return;
+  if (!confirmed) return;
 
   try {
     const res = await fetch(`${API_URL}/premium/delete`, {
@@ -446,13 +555,13 @@ window.deletePremiumKey = async function (key) {
     });
     const data = await res.json();
     if (data.success) {
-      alert("✅ Key berhasil dihapus!");
+      showToast("✅ Key berhasil dihapus!", "success");
       loadPremiumKeys();
     } else {
-      alert(`❌ ${data.error}`);
+      showToast(`❌ ${data.error}`, "error");
     }
   } catch (error) {
-    alert("❌ Gagal menghapus key!");
+    showToast("❌ Gagal menghapus key!", "error");
   }
 };
 
@@ -465,7 +574,9 @@ async function loadPremiumKeys() {
     const tbody = document.getElementById("premium-keys-table");
 
     if (!keys || keys.length === 0) {
-      tbody.innerHTML = '<tr><td colspan="4">Belum ada key</td></tr>';
+      tbody.innerHTML = '<tr><td colspan="5">Belum ada key</td></tr>';
+      const statEl0 = document.getElementById("stat-premium-keys");
+      if (statEl0) statEl0.textContent = "0";
       return;
     }
 
@@ -488,6 +599,12 @@ async function loadPremiumKeys() {
     `,
       )
       .join("");
+
+    const statEl = document.getElementById("stat-premium-keys");
+    if (statEl) {
+      const usedCount = keys.filter((k) => k.status === "used").length;
+      statEl.textContent = usedCount;
+    }
   } catch (error) {
     console.error("Error loading premium keys:", error);
   }

@@ -1,16 +1,19 @@
+<!-- index.html -->
+
 <!DOCTYPE html>
 <html lang="id">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Aetheris Dashboard — Login</title>
+  <link rel="icon" type="image/png" href="assets/round-mascot.png">
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body class="login-page">
 
   <div class="login-container">
     <div class="login-logo">
-      <h1>🎮 Aetheris</h1>
+      <img src="assets/aetheris-banner.png" alt="Aetheris" class="banner" onerror="this.style.display='none'">
       <p>Admin Dashboard</p>
     </div>
 
@@ -26,14 +29,29 @@
       </div>
       <button id="login-btn" class="btn-primary">Login</button>
     </div>
+
+    <div class="login-footer">
+      <a href="https://github.com/hanzlr/aetheris-bot" target="_blank" rel="noopener">
+        ⭐ View Aetheris Bot on GitHub
+      </a>
+    </div>
   </div>
 
   <script type="module">
     import { login } from './js/auth.js'
-    document.getElementById('login-btn').addEventListener('click', () => {
+
+    function doLogin() {
       const email = document.getElementById('email').value
       const password = document.getElementById('password').value
       login(email, password)
+    }
+
+    document.getElementById('login-btn').addEventListener('click', doLogin)
+
+    ;['email', 'password'].forEach((id) => {
+      document.getElementById(id).addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') doLogin()
+      })
     })
   </script>
 
