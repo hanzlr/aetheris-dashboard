@@ -1,3 +1,7 @@
+<p align="center">
+     <img src="./assets/aetheris-banner.png" alt="Aetheris Dashboard Banner" width="100%">
+</p>
+
 # 🎮 Aetheris Bot Dashboard
 
 ![HTML](https://img.shields.io/badge/HTML-5-orange)
