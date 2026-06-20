@@ -1,4 +1,4 @@
-# 🎮 UMB Esport Dashboard
+# 🎮 Aetheris Bot Dashboard
 
 ![HTML](https://img.shields.io/badge/HTML-5-orange)
 ![CSS](https://img.shields.io/badge/CSS-3-blue)
@@ -7,7 +7,7 @@
 ![Vercel](https://img.shields.io/badge/Hosted-Vercel-black)
 ![License](https://img.shields.io/badge/License-MIT-yellow)
 
-Web dashboard admin untuk bot Discord UMB Esport. Dibangun dengan HTML, CSS, dan JavaScript vanilla.
+Web dashboard admin untuk bot Discord Aetheris. Dibangun dengan HTML, CSS, dan JavaScript vanilla.
 
 ## ✨ Fitur
 
@@ -29,7 +29,7 @@ Web dashboard admin untuk bot Discord UMB Esport. Dibangun dengan HTML, CSS, dan
 
 ## 📁 Struktur Folder
 ```
-umb-esport-dashboard/
+aetheris-dashboard/
 ├── index.html          # Halaman login
 ├── dashboard.html      # Halaman dashboard utama
 ├── css/
@@ -52,7 +52,7 @@ const SUPABASE_KEY = 'your_supabase_anon_key'
 Dan API bot di `js/dashboard.js`:
 
 ```javascript
-const API_URL = 'https://umb-esport-bot-production-abed.up.railway.app'
+const API_URL = 'https://aetheris-bot-production.up.railway.app'
 const API_KEY = 'your_api_secret_key'
 ```
 
@@ -60,8 +60,8 @@ const API_KEY = 'your_api_secret_key'
 
 1. Clone repository
 ```bash
-git clone https://github.com/hanzlr/umb-esport-dashboard.git
-cd umb-esport-dashboard
+git clone https://github.com/hanzlr/aetheris-dashboard.git
+cd aetheris-dashboard
 ```
 
 2. Isi Supabase credentials di `js/supabase.js`
@@ -101,8 +101,8 @@ cd umb-esport-dashboard
 ## 🔗 Links
 
 - **Dashboard**: https://dashboardbot-nine.vercel.app
-- **Bot Repository**: https://github.com/hanzlr/umb-esport-bot
-- **Bot API**: https://umb-esport-bot-production-abed.up.railway.app
+- **Bot Repository**: https://github.com/hanzlr/aetheris-bot
+- **Bot API**: https://aetheris-bot-production.up.railway.app
 
 ## 📋 Changelog
 
@@ -110,4 +110,4 @@ Lihat semua perubahan di [CHANGELOG.md](CHANGELOG.md)
 
 ## 👤 Developer
 
-Dibuat oleh **hanzlr** dari **NEXALAB** untuk UMB Esport
+Dibuat oleh **hanzlr** dari **NEXALAB**
