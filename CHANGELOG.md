@@ -82,4 +82,8 @@ Semua perubahan penting pada project UMB Esport Dashboard akan didokumentasikan 
 
 ---
 
+<<<<<<< HEAD
 *Dibuat oleh **Hanz** dari **NEXALAB***
+=======
+*Dibuat oleh **Hanz** dari **NEXALAB***
+>>>>>>> 7e490c0239a7a419ff74be9ecef771fab6e524c6
