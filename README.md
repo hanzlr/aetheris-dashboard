@@ -11,12 +11,13 @@ Web dashboard admin untuk bot Discord UMB Esport. Dibangun dengan HTML, CSS, dan
 
 ## ✨ Fitur
 
-- 👥 **Member Leaderboard** — Lihat ranking member berdasarkan XP
+- 👥 **Member Leaderboard** — Lihat ranking member berdasarkan XP, dengan search/filter
 - ✏️ **Edit Member** — Tambah/kurangi XP dan koin member
 - 📢 **Announcement** — Kirim pengumuman ke channel Discord via bot
 - 🎁 **Give Loot Box** — Kasih loot box ke member tertentu
 - 🔄 **Reset Member** — Reset semua data member
 - 🎉 **Event System** — Start/stop event (Double XP, Double Coins, dll)
+- ⭐ **Premium Keys** — Generate dan hapus premium redeem key
 
 ## 🛠️ Tech Stack
 
@@ -73,6 +74,7 @@ cd umb-esport-dashboard
 
 ### 👥 Member Leaderboard
 - Lihat semua member berdasarkan ranking XP
+- 🔍 Search/filter member berdasarkan username
 - Tambah/kurangi XP per member
 - Tambah/kurangi koin per member
 
@@ -90,6 +92,11 @@ cd umb-esport-dashboard
   - 🎁 Loot Rain
 - Stop event kapanpun
 - Pilih channel untuk announcement event
+
+### ⭐ Premium Keys
+- Generate premium key dengan pilihan durasi (1 Bulan / 3 Bulan / Permanent)
+- Lihat daftar semua key beserta status (Used/Unused) dan siapa yang memakai
+- Hapus key yang sudah tidak diperlukan
 
 ## 🔗 Links
 
