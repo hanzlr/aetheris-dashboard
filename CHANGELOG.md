@@ -1,7 +1,6 @@
 # 📋 Changelog
 
-Semua perubahan penting pada project UMB Esport Dashboard akan didokumentasikan di sini.
-
+Semua perubahan penting pada project Aetheris Dashboard akan didokumentasikan di sini.
 ---
 
 ## [v1.2.0] - 2026
@@ -82,8 +81,4 @@ Semua perubahan penting pada project UMB Esport Dashboard akan didokumentasikan 
 
 ---
 
-<<<<<<< HEAD
 *Dibuat oleh **Hanz** dari **NEXALAB***
-=======
-*Dibuat oleh **Hanz** dari **NEXALAB***
->>>>>>> 7e490c0239a7a419ff74be9ecef771fab6e524c6
