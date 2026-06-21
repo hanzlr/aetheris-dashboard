@@ -4,7 +4,7 @@ All notable changes to the Aetheris Dashboard project will be documented here.
 
 ---
 
-## [v1.2.0] - 2026
+## [v1.2.0] - June 2026
 
 ### 🎨 UI/UX Refresh
 - New color theme: purple, blue, and gold, consistent with the Aetheris mascot
@@ -26,7 +26,7 @@ All notable changes to the Aetheris Dashboard project will be documented here.
 
 ---
 
-## [v1.1.0] - 2026
+## [v1.1.0] - June 2026
 
 ### ✨ New Features
 
@@ -40,7 +40,7 @@ All notable changes to the Aetheris Dashboard project will be documented here.
 
 ---
 
-## [v1.0.0] - 2026
+## [v1.0.0] - June 2026
 
 ### 🎉 Initial Release
 
